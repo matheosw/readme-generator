@@ -1,20 +1,8 @@
-// TODO: Include packages needed for this application
-
-// TODO: Create an array of questions for user input
-// const questions = [];
-
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-// function init() {}
-
-// Function call to initialize app
-// init();
 
 const inquirer = require('inquirer')
 const fs = require('fs');
-// const { type } = require('os');
+// const generationMarkdown = require("./util/generateMarkdown");
+
 
 const questions = [
     {
@@ -22,11 +10,98 @@ const questions = [
         message:'whats the title of the project',
         name: 'title',
         
-    }
+    },
+    {
+        type: 'input',
+        message:'whats the description of the project',
+        name: 'description',
+        
+    },
+    {
+        type: 'input',
+        message:'whats the installation of the project',
+        name: 'installation',
+        
+    },
+    {
+        type: 'input',
+        message:'whats the usage information of the project',
+        name: 'usage information',
+        
+    },
+    {
+        type: 'list',
+        choices:['Boost', 'Creative commons', 'Apache', 'GNU', 'Mozilla'],
+        message:'whats the licences for the project',
+        name:'licences',
+        
+    },
+    {
+        type: 'input',
+        message:'whats the contribution guidelines of the project',
+        name: 'contribution guidelines',
+        
+    },
+    {
+        type: 'input',
+        message:'whats the test guidelines of the project',
+        name: 'test instructions',
+        
+    },
+    {
+        type: 'input',
+        message:'whats your github username',
+        name: 'username',
+        
+    },
+    {
+        type: 'input',
+        message:'whats your email adress',
+        name: 'email',
+        
+    },
 ]
 
+function init(){
 inquirer.prompt(questions)
-.then(answers => {
-    console.log(answers)
-})
-.catch(err=> console.log(err))
+.then((response) => writeToFile(response.fileName, response)
+  );
+}
+
+function writeToFile(fileName, data) {
+   
+    fs.writeFile(`${fileName}.md`, generateMarkdown(data), (err) =>
+       err ? console.error("error") : console.log("well done"))
+   }
+   
+   
+   
+   // Function call to initialize app
+   init();
+
+
+
+// function writeToFile(fileName, data){
+//     fs.writeFile(fileName, data, function(err)){
+//         console.log(fileName)
+//         console.log(fileName)
+//         if (err) {
+//             return  console.log(err)
+//         } else {
+//             console.log("it works")
+//         }
+//     }
+// }
+
+// init();
+
+
+
+// // function to run it
+// function init(){
+//     inquirer.prompt(questions)
+//     .then(function(data){
+//         writeToFile("README.md", generationMarkdown(data));
+//         console.log(data)
+//     })
+    
